@@ -2,6 +2,8 @@
 mod lexer;
 mod token;
 
+pub use token::Token;
+
 #[cfg(test)]
 mod tests {
     use crate::lexer::Lexer;

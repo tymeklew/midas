@@ -3,27 +3,27 @@ mod node;
 
 #[cfg(test)]
 mod tests {
-    use crate::node::{ComparisonOp, ComparisonOpKind, Literal, Node};
+    use lexer::Token;
+
+    use crate::node::{Literals, Node};
 
     #[test]
-    fn real() {
-        // if (1 == 1) {
-        //      real = 1;
-        // }
-        let if_statment = Node::If {
-            base_condition: ComparisonOp {
-                op: ComparisonOpKind::Eq,
-                lhs: Node::Variable(String::from("1")),
-                rhs: Box::new(Node::Literal(Literal::Int(1))),
-            },
-            base_node: Box::new(Node::Assignment {
-                name: String::from("real"),
-                value: Box::new(Node::Literal(Literal::Int(1))),
-            }),
-            else_if: Vec::new(),
-            _else: None,
-        };
+    fn assignment() {
+        // assignment statment
+        // let a : int = 10;
+        let tokens = vec![
+            Token::Identifier("let".into()),
+            Token::Identifier("a".into()),
+            Token::Colon,
+            Token::Identifier("int".into()),
+            Token::Assign,
+            Token::Lit(Literals::Int(10)),
+        ];
 
-        println!("{:?}", if_statment);
+        let ast = Node::Initialize {
+            name: "a".into(),
+            node: Box::new(Node::Literal(Literals::Int(10))),
+            type_: crate::node::Type::Int,
+        };
     }
 }
