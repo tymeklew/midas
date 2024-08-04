@@ -17,7 +17,7 @@ fn add(x : int , y : int) : int {
 # Loops
 ## While
 ```
-while (true) {
+while (!false) {
     
 }
 ```
